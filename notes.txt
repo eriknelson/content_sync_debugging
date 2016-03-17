@@ -1,0 +1,36 @@
+[Debugging notes on failed redeployment]
+
+> Content sync error occurs
+  - We know the front end recognized this, marked the deployment object
+  with has_content_error = true, and hit /bulk_resume (with 200 response).
+  Worked as written.
+> Content sync error message displayed (confirms has_content_error = true).
+> Redeploy clicked shortly after
+  - According to DB results and request logs, we know /redeploy was hit and
+  returned a 202. The second Deploy task was created and triggered, and the
+  fusor deployment object was associated with the second Deploy object.
+
+--
+
+Allowed to sit for some time.
+
+Upon returning, error in interface complaining about locks.
+This forced the second ManageContent task to pause in an error
+state.
+
+Navigated to Sync Status screen and successfully manually sync'd the failed
+repos.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+If the locks were really held on the Katello::Repository-s, a manual
+sync should not have been possible.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Resume clicked on 2nd Deploy task, likely creating the 3rd ManageContent task?
+--
+
+It's possible the root cause here is a race condition between whatever logic
+releases the content locks and the redeployment. We're guessing the locks
+hadn't been fully released by the time ManageContent went to sync the repos
+again, resulting the in lock error. It's possible the unlocking continued
+to follow through, allowing for the manual content sync at a later point in time.

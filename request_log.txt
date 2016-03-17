@@ -1,0 +1,10 @@
+2016-03-16 19:32:06 [I] Completed 200 OK in 1136ms (Views: 763.5ms | ActiveRecord: 37.4ms)
+2016-03-16 19:32:06 [I] Processing by ForemanTasks::Api::TasksController#bulk_resume as JSON
+2016-03-16 19:32:06 [I]   Parameters: {"search"=>"c1ade834-33ce-40e7-a739-2e8182e0fb17", "task"=>{}}
+2016-03-16 19:32:12 [I] Completed 200 OK in 5714ms (Views: 731.8ms | ActiveRecord: 47.0ms)
+2016-03-16 19:32:16 [I] Processing by Fusor::Api::V21::DeploymentsController#redeploy as JSON
+2016-03-16 19:32:16 [I]   Parameters: {"api_version"=>"v21", "id"=>"1", "deployment"=>{}}
+2016-03-16 19:32:16 [W] Attempting to redeploy deployment with id [ 1 ]
+2016-03-16 19:32:18 [I]   Rendered /opt/rh/ruby193/root/usr/share/gems/gems/fusor_server-0.0.1/app/views/fusor/api/v2/common/async.json.rabl within fusor/api/v2/layouts/resource (40.7ms)
+2016-03-16 19:32:18 [I] Completed 202 Accepted in 1646ms (Views: 57.2ms | ActiveRecord: 1.2ms)
+2016-03-16 19:32:18 [I] Processing by Fusor::Api::V21::DeploymentsController#update as JSON

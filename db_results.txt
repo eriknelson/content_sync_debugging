@@ -1,0 +1,37 @@
+foreman=> select * from foreman_tasks_tasks where label = 'Actions::Fusor::Deploy';
+ 
+                id                  |              type               |         label          |     started_at      |      ended_at
+ |  state  | result  |             external_id              | parent_task_id
+--------------------------------------+---------------------------------+------------------------+---------------------+--------------------
+-+---------+---------+--------------------------------------+----------------
+ a7b4fc81-8743-4cb9-94da-e0dbe47e5615 | ForemanTasks::Task::DynflowTask | Actions::Fusor::Deploy | 2016-03-16 20:51:26 |
+ | paused  | error   | 06b34d00-ca6a-4ff7-bde9-e3ef35fd3009 |
+ 7a32822b-115c-4b62-a46b-c7fa936d43da | ForemanTasks::Task::DynflowTask | Actions::Fusor::Deploy | 2016-03-16 23:32:16 | 2016-03-17 01:43:32
+ | stopped | success | 5ade1229-99e7-4211-aed6-01675dae1889 |
+(2 rows)
+
+foreman=> select * from foreman_tasks_tasks where label = 'Actions::Fusor::Content::ManageContent';
+                  id                  |              type               |                 label                  |     started_at      |
+  ended_at       |  state  | result  |             external_id              |            parent_task_id
+--------------------------------------+---------------------------------+----------------------------------------+---------------------+----
+-----------------+---------+---------+--------------------------------------+--------------------------------------
+ c1ade834-33ce-40e7-a739-2e8182e0fb17 | ForemanTasks::Task::DynflowTask | Actions::Fusor::Content::ManageContent | 2016-03-16 20:51:26 | 201
+6-03-16 23:32:35 | stopped | success | 8499eeec-064b-40b3-bf39-d365708a784c | a7b4fc81-8743-4cb9-94da-e0dbe47e5615
+ 06eb0584-909b-4e7c-9ba4-121e52963d0a | ForemanTasks::Task::DynflowTask | Actions::Fusor::Content::ManageContent | 2016-03-16 23:32:18 | 201
+6-03-16 23:32:32 | stopped | error   | bdf34955-fd2c-45d3-997f-d24c7a460762 | 7a32822b-115c-4b62-a46b-c7fa936d43da
+ a3a9f548-d204-4669-b809-9e19f47fce56 | ForemanTasks::Task::DynflowTask | Actions::Fusor::Content::ManageContent | 2016-03-17 00:57:58 | 201
+6-03-17 01:01:32 | stopped | success | 45eb8dfd-af4c-4f58-b14d-c500e8e299bf | 7a32822b-115c-4b62-a46b-c7fa936d43da
+(3 rows)
+
+foreman=> select id, name, foreman_task_uuid from fusor_deployments;
+ id | name |          foreman_task_uuid
+----+------+--------------------------------------
+  1 | jwm  | 7a32822b-115c-4b62-a46b-c7fa936d43da
+(1 row)
+
+foreman=> select id, name, foreman_task_uuid, has_content_error from fusor_deployments;
+ id | name |          foreman_task_uuid           | has_content_error
+----+------+--------------------------------------+-------------------
+  1 | jwm  | 7a32822b-115c-4b62-a46b-c7fa936d43da | f
+(1 row)
+
